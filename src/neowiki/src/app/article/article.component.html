@@ -1,4 +1,10 @@
 <div *ngIf="article">
-  <h1>{{ article.title }}</h1>
-  <p>{{ article.content }}</p>
+  <div>
+    <button *ngIf="isEditAllowed">Edit</button>
+    <button *ngIf="isDeleteAllowed">Delete</button>
+  </div>
+  <div>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content }}</p>
+  </div>
 </div>
