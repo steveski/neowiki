@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../services/article.service';
 import { Article } from '../models/article.model';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-article',
@@ -10,11 +11,15 @@ import { Article } from '../models/article.model';
 })
 export class ArticleComponent implements OnInit {
   article: Article | null = null;
+  dummyArticle = {
+    title: "",
+    content: ""
+  };
   isEditMode = false;
   isPreviewMode = false;
   editedContent: string | null = null; // to hold the content temporarily
 
-  constructor(private route: ActivatedRoute, private articleService: ArticleService) {}
+  constructor(private route: ActivatedRoute, private articleService: ArticleService, private userService: UserService) {}
 
   ngOnInit(): void {
     const articleTitle = this.route.snapshot.paramMap.get('title');
@@ -29,13 +34,21 @@ export class ArticleComponent implements OnInit {
 
     // Create new empty article
     if(!this.article) {
-      this.isEditMode = true;
-      this.article = {
-        id: null,
-        title: articleTitle,
-        displayName: articleTitle?.replace(/_/g, ' '),
-        content: ''
-      } as Article;
+      const canAddArticle = this.userService.hasPermission("add_article");
+      if(canAddArticle) {
+        this.isEditMode = true;
+        this.article = {
+          id: null,
+          title: articleTitle,
+          displayName: articleTitle?.replace(/_/g, ' '),
+          content: ''
+        } as Article;
+      } else {
+        this.article = null;
+        this.dummyArticle.title = articleTitle ?? "Title not specified";
+        this.dummyArticle.content = "There is currently no text in this page. You can search for this page title in other pages, or search the related logs, but you do not have permission to create this page.";
+
+      }
     }
   }
 

@@ -25,4 +25,9 @@ export class UserService {
     return [];
   }
 
+  hasPermission(permission: string): boolean {
+    const permissions = this.getUserPermissions();
+    return permissions.includes(permission);
+  }
+
 }
