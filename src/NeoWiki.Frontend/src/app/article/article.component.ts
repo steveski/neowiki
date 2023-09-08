@@ -22,7 +22,7 @@ export class ArticleComponent implements OnInit {
     const token = localStorage.getItem('access_token');
     if(token){
       const decodedToken = this.jwtHelperService.decodeToken(token);
-      const permissions = decodedToken.split(',');
+      const permissions = decodedToken.permissions.split(',');
 
       this.isAddAllowed = permissions.includes('add_article');
       this.isEditAllowed = permissions.includes('edit_article');
