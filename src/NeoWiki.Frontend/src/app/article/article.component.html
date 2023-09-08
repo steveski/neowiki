@@ -1,7 +1,14 @@
-<div *ngIf="article">
+<div *ngIf="isEditMode">
+  <h2>Editing {{ article?.displayName }}</h2>
+  <input type="text" [ngModel]="article?.displayName">
+  <textarea ngx-markdown [(ngModel)]="article!.content"></textarea>
+</div>
+
+<div *ngIf="!isEditMode && article">
   <app-article-toolbar></app-article-toolbar>
+
   <div>
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.content }}</p>
+    <h1>{{ article.displayName }}</h1>
+    <div [innerHTML]="article.content | markdown"></div>
   </div>
 </div>

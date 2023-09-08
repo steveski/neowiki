@@ -8,17 +8,17 @@ export class ArticleService {
   // Mock data
   private articles: Article[] = [
     {
-      id: 1,
+      id: '4beb7311-55e8-47f6-8e39-8325b1c91f35',
       title: 'Sydney',
       content: 'Sydney is the state capital of New South Wales and the most populous city in Australia.'
     },
     {
-      id: 2,
+      id: '1df4021b-d8c1-42f8-b440-3818bc85a038',
       title: 'Canberra',
       content: 'Canberra is the capital city of Australia. It is Australia\'s largest inland city.'
     },
     {
-      id: 3,
+      id: 'e2a1fbaf-0951-4392-9ee1-609bb46a88c8',
       title: 'Melbourne',
       content: 'Melbourne is the coastal capital of the southeastern Australian state of Victoria.'
     }
