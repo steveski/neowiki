@@ -21,6 +21,11 @@ export class ArticleService {
       id: 'e2a1fbaf-0951-4392-9ee1-609bb46a88c8',
       title: 'Melbourne',
       content: 'Melbourne is the coastal capital of the southeastern Australian state of Victoria.'
+    },
+    {
+      id: '',
+      title: 'CC',
+      content: '= Basics =\n== Alias ==\nChris from Westchester County\n\n== Papa Flerf ==\nxxxx\n\n== Media of choice ==\n[xxxx YouTube]\n\n== Location on Globe ==\nNew York, Westchester Country\n\n= Details =\nA Flerf who has gained notoriety or his kitchen videos which included his wife telling him off for talking "about his nonsense".\n\nAmongst his many claims:\n* The sun is a projection\n* the earth has a dome over it\n* we can see further than we should\n'
     }
   ];
 

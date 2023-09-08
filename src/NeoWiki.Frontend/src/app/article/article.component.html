@@ -1,4 +1,9 @@
 <div *ngIf="isEditMode">
+  <select [(ngModel)]="selectedTemplate">
+    <option *ngFor="let template of templates" [ngValue]="template">{{ template.name }}</option>
+  </select>
+  <button (click)="applyTemplate()">Apply</button>
+
   <h2>Editing {{ article?.displayName }}</h2>
   <input type="text" [ngModel]="article?.displayName">
   <textarea ngx-markdown [(ngModel)]="article!.content"></textarea>

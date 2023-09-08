@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../services/article.service';
 import { Article } from '../models/article.model';
 import { UserService } from '../services/user.service';
+import { ArticleTemplate } from '../models/article-template';
 
 @Component({
   selector: 'app-article',
@@ -15,9 +16,15 @@ export class ArticleComponent implements OnInit {
     title: "",
     content: ""
   };
-  isEditMode = false;
+  isEditMode = true;
   isPreviewMode = false;
   editedContent: string | null = null; // to hold the content temporarily
+
+  selectedTemplate: ArticleTemplate | null = null;
+  templates: ArticleTemplate[] = [
+    { name: 'Flerf Page', template: '## Introduction\n\n\n## Papa Flerf\n\n' },
+    { name: 'Redemption Page', template: '## w00t!!\n\n' }
+  ];
 
   constructor(private route: ActivatedRoute, private articleService: ArticleService, private userService: UserService) {}
 
@@ -74,6 +81,18 @@ export class ArticleComponent implements OnInit {
         this.article = null;
       }
     }
+  }
+
+  applyTemplate(): void {
+    if(!this.article)
+      return;
+
+    const textarea: HTMLTextAreaElement | null = document.querySelector('textarea');
+    const cursorPosition = textarea?.selectionStart;
+    const beforeCursor = this.article?.content.slice(0, cursorPosition);
+    const afterCursor = this.article?.content.slice(cursorPosition);
+    this.article.content = `${beforeCursor}${this.selectedTemplate?.template}${afterCursor}`;
+
   }
 
 }
