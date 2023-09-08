@@ -7,6 +7,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class UserService {
   constructor(private jwtHelperService: JwtHelperService) {}
 
+  isUserAuthenticated(): boolean {
+    const token = localStorage.getItem('access_token');
+    if(!token || this.jwtHelperService.isTokenExpired())
+      return false;
+
+    return true;
+  }
+
   getUserPermissions(): string[] {
     const token = localStorage.getItem('access_token');
     if(token && !this.jwtHelperService.isTokenExpired(token)) {

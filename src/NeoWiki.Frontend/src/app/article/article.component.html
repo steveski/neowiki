@@ -1,8 +1,5 @@
 <div *ngIf="article">
-  <div>
-    <button *ngIf="isEditAllowed">Edit</button>
-    <button *ngIf="isDeleteAllowed">Delete</button>
-  </div>
+  <app-article-toolbar></app-article-toolbar>
   <div>
     <h1>{{ article.title }}</h1>
     <p>{{ article.content }}</p>
