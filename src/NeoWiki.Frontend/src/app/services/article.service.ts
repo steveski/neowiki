@@ -39,4 +39,15 @@ export class ArticleService {
     // return this.httpClient.get<Article>(`YOUR_API_URL/articles/${title}`);
   }
 
+  saveArticle(article: Article) {
+    this.articles.push(article);
+
+    // if(!article.id)
+    // {
+    //   this.httpClient.post<Article>(`YOUR_API_URL/articles/${title}`);
+    // } else {
+    //   this.httpClient.get<Article>(`YOUR_API_URL/articles/${title}`);
+    // }
+  }
+
 }

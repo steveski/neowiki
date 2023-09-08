@@ -2,6 +2,15 @@
   <h2>Editing {{ article?.displayName }}</h2>
   <input type="text" [ngModel]="article?.displayName">
   <textarea ngx-markdown [(ngModel)]="article!.content"></textarea>
+  <div>
+    <button (click)="togglePreview()">Show Preview</button>
+    <button (click)="saveChanges()">Save</button>
+    <button (click)="cancelChanges()">Cancel</button>
+  </div>
+  <div *ngIf="isPreviewMode">
+    <h2>Preview</h2>
+    <div [innerHTML]="editedContent! | markdown"></div>
+  </div>
 </div>
 
 <div *ngIf="!isEditMode && article">
@@ -12,3 +21,7 @@
     <div [innerHTML]="article.content | markdown"></div>
   </div>
 </div>
+
+<!-- <div *ngIf="!article">
+  <h1>{{ article?.displayName }}</h1>
+</div> -->

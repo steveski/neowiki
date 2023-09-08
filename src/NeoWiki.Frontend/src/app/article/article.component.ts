@@ -11,6 +11,8 @@ import { Article } from '../models/article.model';
 export class ArticleComponent implements OnInit {
   article: Article | null = null;
   isEditMode = false;
+  isPreviewMode = false;
+  editedContent: string | null = null; // to hold the content temporarily
 
   constructor(private route: ActivatedRoute, private articleService: ArticleService) {}
 
@@ -34,6 +36,30 @@ export class ArticleComponent implements OnInit {
         displayName: articleTitle?.replace(/_/g, ' '),
         content: ''
       } as Article;
+    }
+  }
+
+  togglePreview(): void {
+    this.isPreviewMode = !this.isPreviewMode;
+    this.editedContent = this.article?.content ?? null;
+  }
+
+  saveChanges(): void {
+    if(this.article)
+      this.articleService.saveArticle(this.article);
+
+    this.isEditMode = false;
+    this.isPreviewMode = false;
+  }
+
+  cancelChanges(): void {
+    const confirmation = window.confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')
+    if(confirmation) {
+      this.isEditMode = false;
+      this.isPreviewMode = false;
+      if(this.article?.id === null) {
+        this.article = null;
+      }
     }
   }
 
