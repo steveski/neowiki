@@ -16,14 +16,17 @@ export const permissionsGuard: CanActivateFn = (route, state) => {
     const permissions = decodedToken.permissions.split(',');
 
     if(permissions.includes('add_article')) {
+      // Allow adding an article
       return true;
     }
 
     if(permissions.includes('edit_article')) {
+      // Allow editing an article
       return true;
     }
 
     if(permissions.includes('delete_article')) {
+      // Allow deleting an article
       return true;
     }
 
