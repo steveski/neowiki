@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/admin.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { ArticleComponent } from './article/article.component';
 import { ArticleToolbarComponent } from './article-toolbar/article-toolbar.component';
+import { TemplateAdminComponent } from './template-admin/template-admin.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ArticleToolbarComponent } from './article-toolbar/article-toolbar.compo
     AdminComponent,
     UnauthorizedComponent,
     ArticleComponent,
-    ArticleToolbarComponent
+    ArticleToolbarComponent,
+    TemplateAdminComponent
   ],
   imports: [
     BrowserModule,

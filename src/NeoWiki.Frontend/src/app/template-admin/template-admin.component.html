@@ -1,0 +1,21 @@
+<select [(ngModel)]="selectedTemplate">
+  <option *ngFor="let template of templates" [ngValue]="template">
+    {{ template.name }}
+  </option>
+</select>
+
+<button (click)="editTemplate()">Edit</button>
+<button (click)="createNewTemplate()">Create New</button>
+
+<div *ngIf="isEditMode">
+  <input type="text" [(ngModel)]="selectedTemplate.name">
+  <textarea [(ngModel)]="selectedTemplate.template"></textarea>
+  <button (click)="togglePreview()">Show Preview</button>
+  <button (click)="saveChanges()">Save</button>
+  <button (click)="cancelChanges()">Cancel</button>
+
+  <div *ngIf="isPreviewMode || isDisplayExistingMode">
+    <div [innerHTML]="selectedTemplate.template | markdown"></div>
+  </div>
+</div>
+<div *ngIf="selectedTemplate" [innerHTML]="selectedTemplate.template | markdown"></div>

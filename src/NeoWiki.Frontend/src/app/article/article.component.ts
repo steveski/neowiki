@@ -4,6 +4,7 @@ import { ArticleService } from '../services/article.service';
 import { Article } from '../models/article.model';
 import { UserService } from '../services/user.service';
 import { ArticleTemplate } from '../models/article-template';
+import { ArticleTemplateService } from '../services/article-template.service';
 
 @Component({
   selector: 'app-article',
@@ -20,13 +21,10 @@ export class ArticleComponent implements OnInit {
   isPreviewMode = false;
   editedContent: string | null = null; // to hold the content temporarily
 
+  templates: ArticleTemplate[] | null = null;
   selectedTemplate: ArticleTemplate | null = null;
-  templates: ArticleTemplate[] = [
-    { name: 'Flerf Page', template: '## Introduction\n\n\n## Papa Flerf\n\n' },
-    { name: 'Redemption Page', template: '## w00t!!\n\n' }
-  ];
 
-  constructor(private route: ActivatedRoute, private articleService: ArticleService, private userService: UserService) {}
+  constructor(private route: ActivatedRoute, private articleService: ArticleService, private userService: UserService, private templatesService: ArticleTemplateService) {}
 
   ngOnInit(): void {
     const articleTitle = this.route.snapshot.paramMap.get('title');
@@ -57,6 +55,8 @@ export class ArticleComponent implements OnInit {
 
       }
     }
+
+    this.templates = this.templatesService.getTemplates();
   }
 
   togglePreview(): void {
