@@ -15,6 +15,20 @@ export class UserService {
     return true;
   }
 
+  hasClaim(claim: string): boolean {
+    const token = localStorage.getItem('access_token');
+
+    if(token && !this.jwtHelperService.isTokenExpired(token)) {
+      const decodedToken = this.jwtHelperService.decodeToken(token);
+      const claimValue = decodedToken[claim];
+      if(!claimValue)
+        return false;
+
+      return true;
+    }
+    return false;
+  }
+
   getUserPermissions(): string[] {
     const token = localStorage.getItem('access_token');
     if(token && !this.jwtHelperService.isTokenExpired(token)) {
